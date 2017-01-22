@@ -1,17 +1,17 @@
 {
-    "name": "[*vendor*]/[*name*]",
-    "description": "[*desc*]",
-    "type": "[*type*]",
-    "license": "[*license*]",
+    "name": "[*composer.vendor*]/[*composer.name*]",
+    "description": "[*composer.desc*]",
+    "type": "[*composer.type*]",
+    "license": "[*composer.license*]",
     "authors": [
         {
-            "name": "[*author*]",
-            "email": "[*email*]"
+            "name": "[*composer.author*]",
+            "email": "[*composer.email*]"
         }
     ],
-    "minimum-stability": "[*minstab*]",
+    "minimum-stability": "[*composer.minstab*]",
     "require": {
-        "php": "[*phpver*]"
+        "php": "[*composer.phpver*]"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",
@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "[*autoload*]": "src/"
+            "[*composer.autoload.ns*]": "[*composer.autoload.dir*]"
         }
     }
 }
