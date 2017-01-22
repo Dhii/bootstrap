@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Dhii Repo Boostrap" default="init" basedir="." description="">
+
+    <target name="init" description="Initialization">
+        
+    </target>
+
+</project>
