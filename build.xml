@@ -1,8 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Dhii Repo Boostrap" default="init" basedir="." description="">
 
-    <target name="init" description="Initialization">
-        
+    <property name="quiet" value="false" />
+
+    <!-- Argument defaults for Composer package -->
+    <property name="composer.vendor"       value="dhii" />
+    <property name="composer.name"         value="new-project" />
+    <property name="composer.desc"         value="" />
+    <property name="composer.type"         value="library" />
+    <property name="composer.license"      value="MIT" />
+    <property name="composer.author"       value="Dhii Team" />
+    <property name="composer.email"        value="development@dhii.co" />
+    <property name="composer.minstab"      value="dev" />
+    <property name="composer.phpver"       value="^5.3 | ^7.0" />
+    <property name="composer.autoload.ns"  value="Dhii\\NewProject\\" />
+    <property name="composer.autoload.dir" value="src" />
+
+    <fileset id="netbeans.project.xml" dir="./nbproject">
+        <include pattern="project.xml" />
+    </fileset>
+
+    <fileset id="netbeans.project.properties" dir="./nbproject">
+        <include pattern="project.properties" />
+    </fileset>
+
+    <fileset id="composer.json" dir=".">
+        <include pattern="composer.json" />
+    </fileset>
+
+    <!--
+        MAIN TARGET
+    -->
+    <target name="init" depends="vars.init, composer.init, netbeans.init">
+    </target>
+
+    <!--
+        COMPOSER PACKAGE INITIALIZER
+        Replaces the tokens in composer.json
+    -->
+    <target name="composer.init" description="Sets the composer package info">
+        <reflexive>
+            <fileset refid="composer.json" />
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="\[\*composer\.vendor\*\]"       replace="${composer.vendor}"/>
+                    <regexp pattern="\[\*composer\.name\*\]"         replace="${composer.name}"/>
+                    <regexp pattern="\[\*composer\.desc\*\]"         replace="${composer.desc}"/>
+                    <regexp pattern="\[\*composer\.type\*\]"         replace="${composer.type}"/>
+                    <regexp pattern="\[\*composer\.license\*\]"      replace="${composer.license}"/>
+                    <regexp pattern="\[\*composer\.author\*\]"       replace="${composer.author}"/>
+                    <regexp pattern="\[\*composer\.email\*\]"        replace="${composer.email}"/>
+                    <regexp pattern="\[\*composer\.minstab\*\]"      replace="${composer.minstab}"/>
+                    <regexp pattern="\[\*composer\.phpver\*\]"       replace="${composer.phpver}"/>
+                    <regexp pattern="\[\*composer\.autoload.ns\*\]"  replace="${composer.autoload.ns}"/>
+                    <regexp pattern="\[\*composer\.autoload.dir\*\]" replace="${composer.autoload.dir}"/>
+                </replaceregexp>
+            </filterchain>
+        </reflexive>
+    </target>
+
+    <!--
+        NETBEANS PROJECT FILES INITIALIZER
+        Main target for NB project file modifications
+    -->
+    <target name="netbeans.init" description="" depends="netbeans.init.project.xml, netbeans.init.project.properties">
+    </target>
+
+    <!--
+        NETBEANS PROJECT XML FILE
+        Replaces tokens in the NB project XML file
+    -->
+    <target name="netbeans.init.project.xml" description="Updates the NetBeans Project Info File">
+        <reflexive>
+            <fileset refid="netbeans.project.xml" />
+            <filterchain>
+                <replacetokens begintoken="[*" endtoken="*]">
+                    <token key="netbeans.project.name" value="${netbeans.project.name}" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+    </target>
+
+    <!--
+        NETBEANS PROJECT PROPERTIES FILE
+        Replaces tokens in the NB properties file
+    -->
+    <target name="netbeans.init.project.properties" description="Updates the NetBeans Properties File">
+        <reflexive>
+            <fileset refid="netbeans.project.properties" />
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="\[\*netbeans\.project\.name\*\]"  replace="${composer.name}"/>
+                </replaceregexp>
+            </filterchain>
+        </reflexive>
+    </target>
+
+    <!--
+        INITIALIES THE VARIABLES
+    -->
+    <target name="vars.init" description="Initializes the variables">
+        <if>
+            <isfalse value="${quiet}" />
+            <then>
+                <phingcall target="vars.prompt"></phingcall>
+            </then>
+        </if>
+        <property name="netbeans.project.name" value="${composer.vendor} - ${composer.name}" />
+        <propertyregex property="composer.autoload.ns"
+            override="true"
+            subject="${composer.autoload.ns}"
+            pattern="\\"
+            replace="\\\\" />
+    </target>
+
+    <!--
+        VARIABLE PROMPTS
+        Prompts the user for variable values
+    -->
+    <target name="vars.prompt" description="Prompts the user for values">
+        <propertyprompt defaultValue="${composer.vendor}"       propertyName="composer.vendor"       promptText="Vendor" />
+        <propertyprompt defaultValue="${composer.name}"         propertyName="composer.name"         promptText="Package Name"/>
+        <propertyprompt defaultValue="${composer.desc}"         propertyName="composer.desc"         promptText="Description"/>
+        <propertyprompt defaultValue="${composer.type}"         propertyName="composer.type"         promptText="Package Type" />
+        <propertyprompt defaultValue="${composer.license}"      propertyName="composer.license"      promptText="License" />
+        <propertyprompt defaultValue="${composer.author}"       propertyName="composer.author"       promptText="Author Name" />
+        <propertyprompt defaultValue="${composer.email}"        propertyName="composer.email"        promptText="Author Email" />
+        <propertyprompt defaultValue="${composer.minstab}"      propertyName="composer.minstab"      promptText="Minimum Stability" />
+        <propertyprompt defaultValue="${composer.phpver}"       propertyName="composer.phpver"       promptText="PHP Version Constraint" />
+        <propertyprompt defaultValue="${composer.autoload.ns}"  propertyName="composer.autoload.ns"  promptText="PSR-4 Autoload Namespace" />
+        <propertyprompt defaultValue="${composer.autoload.dir}" propertyName="composer.autoload.dir" promptText="PSR-4 Autoload Directory" />
     </target>
 
 </project>
