@@ -1,0 +1,27 @@
+{
+    "name": "[*composer.vendor*]/[*composer.name*]",
+    "description": "[*composer.desc*]",
+    "type": "[*composer.type*]",
+    "license": "[*composer.license*]",
+    "authors": [
+        {
+            "name": "[*composer.author*]",
+            "email": "[*composer.email*]"
+        }
+    ],
+    "minimum-stability": "[*composer.minstab*]",
+    "require": {
+        "php": "[*composer.phpver*]"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8",
+        "ptrofimov/xpmock": "^1.1",
+        "dhii/php-cs-fixer-config": "dev-php-5.3",
+        "codeclimate/php-test-reporter": "<=0.3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "[*composer.autoload.ns*]": "[*composer.autoload.dir*]"
+        }
+    }
+}
