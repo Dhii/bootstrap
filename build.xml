@@ -49,22 +49,38 @@
         replace="\\\\" />
 
     <!--
+        OTHER VARS
+    -->
+    <property name="file.composer.json"          value="composer.json" />
+    <property name="file.nb.project.xml"         value="project.xml" />
+    <property name="file.nb.project.properties"  value="project.properties" />
+    <property name="file.template.composer.json" value="composer.json.template" />
+
+    <!--
         FILESETS
     -->
     <fileset id="netbeans.project.xml" dir="./nbproject">
-        <include pattern="project.xml" />
+        <include pattern="${file.nb.project.xml}" />
     </fileset>
     <fileset id="netbeans.project.properties" dir="./nbproject">
-        <include pattern="project.properties" />
+        <include pattern="${file.nb.project.properties}" />
     </fileset>
     <fileset id="composer.json" dir=".">
-        <include pattern="composer.json" />
+        <include pattern="${file.composer.json}" />
+    </fileset>
     </fileset>
 
     <!--
         MAIN TARGET
     -->
-    <target name="init" depends="composer.init, netbeans.init, readme.init">
+    <target name="init" depends="files.init, composer.init, netbeans.init, readme.init">
+    </target>
+
+    <!--
+        Initializes the files
+    -->
+    <target name="files.init">
+        <move file="${file.template.composer.json}" tofile="${file.composer.json}" overwrite="true" />
     </target>
 
     <!--
