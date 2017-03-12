@@ -68,12 +68,14 @@
     <fileset id="composer.json" dir=".">
         <include pattern="${file.composer.json}" />
     </fileset>
+    <fileset id="git.keep.files" dir=".">
+        <include pattern="**/.gitkeep" />
     </fileset>
 
     <!--
         MAIN TARGET
     -->
-    <target name="init" depends="files.init, composer.init, netbeans.init, readme.init, git.init">
+    <target name="init" depends="files.init, composer.init, netbeans.init, readme.init, git.init, finalize">
     </target>
 
     <!--
@@ -161,6 +163,15 @@
         <exec command="git init" />
         <exec command="git checkout -b master" />
         <exec command="git checkout -b develop" />
+    </target>
+
+    <!--
+        Finalization
+    -->
+    <target name="finalize">
+        <delete>
+            <fileset refid="git.keep.files" />
+        </delete>
     </target>
 
 </project>
