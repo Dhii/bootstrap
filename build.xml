@@ -73,7 +73,7 @@
     <!--
         MAIN TARGET
     -->
-    <target name="init" depends="files.init, composer.init, netbeans.init, readme.init">
+    <target name="init" depends="files.init, composer.init, netbeans.init, readme.init, git.init">
     </target>
 
     <!--
@@ -151,6 +151,16 @@
     -->
     <target name="readme.init" description="">
         <echo file="README.md" append="false" msg="# ${composer.name}${line.separator}${line.separator}${composer.desc}${line.separator}" />
+    </target>
+
+    <!--
+        Initializes GIT repository
+    -->
+    <target name="git.init">
+        <exec command="rm -rf .git" />
+        <exec command="git init" />
+        <exec command="git checkout -b master" />
+        <exec command="git checkout -b develop" />
     </target>
 
 </project>
