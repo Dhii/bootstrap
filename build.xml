@@ -216,6 +216,7 @@
                 <exec command="git remote add origin ${git.remote}" />
             </then>
         </if>
+        <exec command="git add -a" />
     </target>
 
     <!--
