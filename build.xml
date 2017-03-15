@@ -42,12 +42,12 @@
         VARIABLE COMPUTATION
     -->
     <property name="netbeans.project.name" value="${composer.vendor} - ${composer.name}" />
+    <property name="composer.autoload.ns" value="${composer.autoload.ns}\" override="true" />
     <propertyregex property="composer.autoload.ns"
         override="true"
         subject="${composer.autoload.ns}"
-        pattern="\\\\"
-        replace="\\" />
-    <property name="composer.autoload.ns" value="${composer.autoload.ns}\\" />
+        pattern="\\"
+        replace="\\\\\\\\" />
 
     <!--
         OTHER VARS
