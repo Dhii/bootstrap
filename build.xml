@@ -57,6 +57,8 @@
     <property name="file.nb.project.xml"        value="project.xml" />
     <property name="file.nb.project.properties" value="project.properties" />
 
+    <property name="file.composer.lock"         value="composer.lock" />
+
     <property name="file.composer.json"         value="composer.json" />
     <property name="template.composer.json"     value="composer.json.template" />
 
@@ -223,6 +225,7 @@
         <delete>
             <fileset refid="files.git" />
         </delete>
+        <delete file="${file.composer.lock}" />
         <exec command="composer update" />
     </target>
 
