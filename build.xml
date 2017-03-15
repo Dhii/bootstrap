@@ -83,7 +83,7 @@
         <include pattern="${file.readme.md}" />
     </fileset>
 
-    <fileset id="git.keep.files" dir=".">
+    <fileset id="files.git" dir=".">
         <include pattern="**/.gitkeep" />
     </fileset>
 
@@ -211,7 +211,9 @@
     -->
     <target name="finalize">
         <delete>
-            <fileset refid="git.keep.files" />
+            <fileset refid="files.git" />
+        </delete>
+    </target>
         </delete>
     </target>
 
