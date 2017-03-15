@@ -209,8 +209,9 @@
     <target name="git.init">
         <exec command="rm -rf .git" />
         <exec command="git init" />
-        <exec command="git checkout -b develop" />
-        <exec command="git checkout -b master" />
+        <exec command="git branch master" />
+        <exec command="git branch develop" />
+        <exec command="git checkout master" />
         <if>
             <not><equals arg1="${git.remote}" arg2="(none)" /></not>
             <then>
