@@ -15,5 +15,10 @@
     },
     "require-dev": {
         "phing/phing": "2.*"
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "echo 'You can now run `phing` to initialize your project!'"
+        ]
     }
 }
