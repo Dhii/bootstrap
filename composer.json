@@ -15,10 +15,5 @@
     },
     "require-dev": {
         "phing/phing": "2.*"
-    },
-    "scripts": {
-        "post-create-project-cmd": [
-            "./vendor/bin/phing"
-        ]
     }
 }
