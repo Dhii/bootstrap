@@ -227,7 +227,7 @@
             <fileset refid="files.git" />
         </delete>
         <delete file="${file.composer.lock}" />
-        <exec command="composer update" />
+        <exec command="composer update" passthru="true" />
     </target>
 
     <!--
