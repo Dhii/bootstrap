@@ -61,6 +61,9 @@
     <property name="file.readme.md"             value="README.md" />
     <property name="template.readme.md"         value="README.md.template" />
 
+    <property name="file.changelog.md"          value="CHANGELOG.md" />
+    <property name="template.changelog.md"      value="CHANGELOG.md.template" />
+
     <!--
         FILESETS
     -->
@@ -96,6 +99,7 @@
     <target name="files.init">
         <move file="${template.composer.json}" tofile="${file.composer.json}" overwrite="true" />
         <move file="${template.readme.md}"     tofile="${file.readme.md}" overwrite="true" />
+        <move file="${template.changelog.md}"  tofile="${file.changelog.md}" overwrite="true" />
     </target>
 
     <!--
