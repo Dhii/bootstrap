@@ -36,4 +36,9 @@ phing -Dquiet=true -Dcomposer.vendor=dhii -Dcomposer.name=my-project ...
 
 For a full list of what properties you can set, take a peek at the [`build.xml`] file.
 
+## Known Issues
+
+* Due to a [Composer bug][1] it is currently not possible to automatically invoke `phing` after project creation.
+
+[1]: https://github.com/composer/composer/issues/3299
 [`build.xml`]: https://github.com/Dhii/bootstrap/blob/master/build.xml
