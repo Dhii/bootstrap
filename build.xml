@@ -90,7 +90,14 @@
     <!--
         MAIN TARGET
     -->
-    <target name="init" depends="files.init, composer.init, netbeans.init, readme.init, git.init, finalize">
+    <target name="init"
+            depends="
+                files.init,
+                composer.init,
+                netbeans.init,
+                readme.init,
+                git.init,
+                finalize">
     </target>
 
     <!--
