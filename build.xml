@@ -17,6 +17,7 @@
     <property name="default.composer.phpver"       value="^5.3 | ^7.0" />
     <property name="default.composer.autoload.ns"  value="Dhii\NewProject" />
     <property name="default.composer.autoload.dir" value="src" />
+    <property name="default.git.remote"            value="(none)" />
 
     <!--
         VARIABLE PROMPTS
@@ -35,6 +36,7 @@
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.phpver}"       propertyName="composer.phpver"       promptText="PHP Version Constraint" />
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.autoload.ns}"  propertyName="composer.autoload.ns"  promptText="PSR-4 Autoload Namespace" />
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.autoload.dir}" propertyName="composer.autoload.dir" promptText="PSR-4 Autoload Directory" />
+            <propertyprompt useExistingValue="true" defaultValue="${default.git.remote}"            propertyName="git.remote"            promptText="Git Remote URL" />
         </then>
     </if>
 
@@ -210,6 +212,12 @@
         <exec command="git init" />
         <exec command="git checkout -b develop" />
         <exec command="git checkout -b master" />
+        <if>
+            <not><equals arg1="${git.remote}" arg2="(none)" /></not>
+            <then>
+                <exec command="git remote add origin ${git.remote}" />
+            </then>
+        </if>
     </target>
 
     <!--
