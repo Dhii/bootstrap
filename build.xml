@@ -164,7 +164,24 @@
         Updates the readme with the package name and description.
     -->
     <target name="readme.init" description="">
-        <echo file="README.md" append="false" msg="# ${composer.name}${line.separator}${line.separator}${composer.desc}${line.separator}" />
+        <reflexive>
+            <fileset refid="readme.md" />
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="\[\*composer\.vendor\*\]"       replace="${composer.vendor}" />
+                    <regexp pattern="\[\*composer\.name\*\]"         replace="${composer.name}" />
+                    <regexp pattern="\[\*composer\.desc\*\]"         replace="${composer.desc}" />
+                    <regexp pattern="\[\*composer\.type\*\]"         replace="${composer.type}" />
+                    <regexp pattern="\[\*composer\.license\*\]"      replace="${composer.license}" />
+                    <regexp pattern="\[\*composer\.author\*\]"       replace="${composer.author}" />
+                    <regexp pattern="\[\*composer\.email\*\]"        replace="${composer.email}" />
+                    <regexp pattern="\[\*composer\.minstab\*\]"      replace="${composer.minstab}" />
+                    <regexp pattern="\[\*composer\.phpver\*\]"       replace="${composer.phpver}" />
+                    <regexp pattern="\[\*composer\.autoload.ns\*\]"  replace="${composer.autoload.ns}" />
+                    <regexp pattern="\[\*composer\.autoload.dir\*\]" replace="${composer.autoload.dir}" />
+                </replaceregexp>
+            </filterchain>
+        </reflexive>
     </target>
 
     <!--
