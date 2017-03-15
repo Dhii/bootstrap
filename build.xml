@@ -15,7 +15,7 @@
     <property name="default.composer.email"        value="development@dhii.co" />
     <property name="default.composer.minstab"      value="dev" />
     <property name="default.composer.phpver"       value="^5.3 | ^7.0" />
-    <property name="default.composer.autoload.ns"  value="Dhii\\NewProject\\" />
+    <property name="default.composer.autoload.ns"  value="Dhii\NewProject" />
     <property name="default.composer.autoload.dir" value="src" />
 
     <!--
@@ -45,8 +45,9 @@
     <propertyregex property="composer.autoload.ns"
         override="true"
         subject="${composer.autoload.ns}"
-        pattern="\\"
-        replace="\\\\" />
+        pattern="\\\\"
+        replace="\\" />
+    <property name="composer.autoload.ns" value="${composer.autoload.ns}\\" />
 
     <!--
         OTHER VARS
