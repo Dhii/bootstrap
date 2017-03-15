@@ -64,6 +64,8 @@
     <property name="file.changelog.md"          value="CHANGELOG.md" />
     <property name="template.changelog.md"      value="CHANGELOG.md.template" />
 
+    <property name="file.build.xml"             value="build.xml" />
+
     <!--
         FILESETS
     -->
@@ -85,6 +87,10 @@
 
     <fileset id="files.git" dir=".">
         <include pattern="**/.gitkeep" />
+    </fileset>
+
+    <fileset id="files.build" dir=".">
+        <include pattern="${file.build.xml}" />
     </fileset>
 
     <!--
@@ -214,6 +220,13 @@
             <fileset refid="files.git" />
         </delete>
     </target>
+
+    <!--
+        Selfdestruct
+    -->
+    <target name="selfdestruct">
+        <delete>
+            <fileset refid="files.build" />
         </delete>
     </target>
 
