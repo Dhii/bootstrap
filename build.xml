@@ -171,7 +171,7 @@
             <fileset refid="netbeans.project.properties" />
             <filterchain>
                 <replaceregexp>
-                    <regexp pattern="\[\*netbeans\.project\.name\*\]"  replace="${composer.name}"/>
+                    <regexp pattern="\[\*composer\.name\*\]"  replace="${composer.name}"/>
                 </replaceregexp>
             </filterchain>
         </reflexive>
