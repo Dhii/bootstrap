@@ -51,10 +51,14 @@
     <!--
         OTHER VARS
     -->
-    <property name="file.composer.json"          value="composer.json" />
-    <property name="file.nb.project.xml"         value="project.xml" />
-    <property name="file.nb.project.properties"  value="project.properties" />
-    <property name="file.template.composer.json" value="composer.json.template" />
+    <property name="file.nb.project.xml"        value="project.xml" />
+    <property name="file.nb.project.properties" value="project.properties" />
+
+    <property name="file.composer.json"         value="composer.json" />
+    <property name="template.composer.json"     value="composer.json.template" />
+
+    <property name="file.readme.md"             value="README.md" />
+    <property name="template.readme.md"         value="README.md.template" />
 
     <!--
         FILESETS
@@ -62,12 +66,19 @@
     <fileset id="netbeans.project.xml" dir="./nbproject">
         <include pattern="${file.nb.project.xml}" />
     </fileset>
+
     <fileset id="netbeans.project.properties" dir="./nbproject">
         <include pattern="${file.nb.project.properties}" />
     </fileset>
+
     <fileset id="composer.json" dir=".">
         <include pattern="${file.composer.json}" />
     </fileset>
+
+    <fileset id="readme.md" dir=".">
+        <include pattern="${file.readme.md}" />
+    </fileset>
+
     <fileset id="git.keep.files" dir=".">
         <include pattern="**/.gitkeep" />
     </fileset>
@@ -82,7 +93,8 @@
         Initializes the files
     -->
     <target name="files.init">
-        <move file="${file.template.composer.json}" tofile="${file.composer.json}" overwrite="true" />
+        <move file="${template.composer.json}" tofile="${file.composer.json}" overwrite="true" />
+        <move file="${template.readme.md}"     tofile="${file.readme.md}" overwrite="true" />
     </target>
 
     <!--
