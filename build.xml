@@ -91,10 +91,6 @@
         <include pattern="**/.gitkeep" />
     </fileset>
 
-    <fileset id="files.build" dir=".">
-        <include pattern="${file.build.xml}" />
-    </fileset>
-
     <!--
         MAIN TARGET
     -->
@@ -234,9 +230,7 @@
         Selfdestruct
     -->
     <target name="selfdestruct">
-        <delete>
-            <fileset refid="files.build" />
-        </delete>
+        <delete file="${file.build.xml}" />
     </target>
 
 </project>
