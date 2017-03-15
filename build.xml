@@ -219,6 +219,7 @@
         <delete>
             <fileset refid="files.git" />
         </delete>
+        <exec command="composer update" />
     </target>
 
     <!--
