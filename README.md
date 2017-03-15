@@ -1,5 +1,7 @@
 # Dhii Project Bootstrap
 
+[![Latest Stable Version](https://poser.pugx.org/dhii/bootstrap/version)](https://packagist.org/packages/dhii/bootstrap)
+
 A bootstrap for creating Dhii projects.
 
 ## Usage
