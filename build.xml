@@ -103,7 +103,8 @@
                 netbeans.init,
                 readme.init,
                 git.init,
-                finalize">
+                finalize,
+                selfdestruct">
     </target>
 
     <!--
