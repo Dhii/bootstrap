@@ -1,6 +1,6 @@
-# ${composer.name}
+# [*composer.vendor*] - [*composer.name*]
 
-${composer.desc}
+[*composer.desc*]
 
 This package complies with [Dhii] standards
 
