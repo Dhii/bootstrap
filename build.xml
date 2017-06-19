@@ -7,6 +7,9 @@
     <property name="buildFnFile" value="build-functions.php" />
     <php expression="require('${buildFnFile}');" />
 
+    <!-- Default Timezone -->
+    <php expression="date_default_timezone_set('UTC');" />
+
     <!--
         VARIABLE DEFAULTS
     -->
@@ -54,6 +57,12 @@
         subject="${composer.autoload.ns}"
         pattern="\\"
         replace="\\\\\\\\" />
+    <php expression="strtoupper('${composer.license}')" returnProperty="composer.license" />
+    <php expression="ucWordsKebabCase('${composer.name}')" returnProperty="project" />
+    <php expression="ucWordsKebabCase('${composer.vendor}')" returnProperty="organization" />
+    <tstamp>
+        <format property="date.year" pattern="%Y" />
+    </tstamp>
 
     <!--
         OTHER VARS
@@ -71,6 +80,10 @@
 
     <property name="file.changelog.md"          value="CHANGELOG.md" />
     <property name="template.changelog.md"      value="CHANGELOG.md.template" />
+
+    <property name="dir.licenses"               value="./licenses" />
+    <property name="file.license"               value="LICENSE" />
+    <property name="template.license"           value="LICENSE-${composer.license}" />
 
     <property name="file.build.xml"             value="build.xml" />
 
@@ -106,6 +119,7 @@
                 composer.init,
                 netbeans.init,
                 readme.init,
+                license.init,
                 git.init,
                 finalize,
                 selfdestruct">
@@ -208,6 +222,27 @@
     </target>
 
     <!--
+        LICENSE FILE
+        Templates the correct license file and removes the others.
+    -->
+    <target name="license.init">
+        <reflexive>
+            <fileset dir="${dir.licenses}" >
+                <include pattern="${template.license}" />
+            </fileset>
+            <filterchain>
+                <replacetokens begintoken="{{" endtoken="}}">
+                    <token key="project" value="${project}" />
+                    <token key="organization" value="${organization}" />
+                    <token key="year" value="${date.year}" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+        <move file="${dir.licenses}/${template.license}" tofile="${file.license}" overwrite="true" />
+        <delete dir="${dir.licenses}" />
+    </target>
+
+    <!--
         Initializes GIT repository
     -->
     <target name="git.init">
@@ -241,6 +276,7 @@
     -->
     <target name="selfdestruct">
         <delete file="${file.build.xml}" />
+        <delete file="${buildFnFile}" />
     </target>
 
 </project>
