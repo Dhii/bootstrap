@@ -39,10 +39,12 @@
 
             <!-- Generate vendor from author -->
             <php expression="toKebabCase('${composer.author}')" returnProperty="default.composer.vendor" />
-            <property name="organization" value="${composer.author}" override="true" />
 
             <!-- Prompt for vendor -->
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.vendor}"       propertyName="composer.vendor"       promptText="Vendor" />
+
+            <!-- Generate organization name from vendor -->
+            <php expression="kebabCaseToUcWords('${composer.vendor}')" returnProperty="organization" />
 
             <!-- Prompt for project name -->
             <propertyprompt useExistingValue="true" defaultValue="${default.project.name}"          propertyName="project.name"          promptText="Project Name"/>
