@@ -59,7 +59,7 @@
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.license}"      propertyName="composer.license"      promptText="License" />
             <php expression="strtoupper('${composer.license}')" returnProperty="composer.license" />
 
-            <php expression="generateNamespace('${organization}', '${project.name}')" returnProperty="default.composer.autoload.ns" />
+            <php expression="generateNamespace('${composer.vendor}', '${project.name}')" returnProperty="default.composer.autoload.ns" />
 
             <!-- Prompt fpor the rest -->
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.minstab}"      propertyName="composer.minstab"      promptText="Minimum Stability" />

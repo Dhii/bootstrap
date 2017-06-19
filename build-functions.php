@@ -50,16 +50,16 @@ function toCamelCase($string)
 }
 
 /**
- * Generates the namespace given the author and project names.
+ * Generates the namespace given the vendor and project names.
  *
  * @since [*next-version*]
  *
- * @param string $author   The author name.
+ * @param string $vendor   The vendor.
  * @param string $projName The project name.
  *
  * @return string
  */
-function generateNamespace($author, $projName)
+function generateNamespace($vendor, $projName)
 {
-    return sprintf('%1$s\\%2$s', toCamelCase($author), toCamelCase($projName));
+    return sprintf('%1$s\\%2$s', toCamelCase(kebabCaseToUcWords($vendor)), toCamelCase($projName));
 }
