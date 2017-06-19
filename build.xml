@@ -3,6 +3,10 @@
 
     <property name="quiet" value="false" />
 
+    <!-- Import Build Functions -->
+    <property name="buildFnFile" value="build-functions.php" />
+    <php expression="require('${buildFnFile}');" />
+
     <!--
         VARIABLE DEFAULTS
     -->
