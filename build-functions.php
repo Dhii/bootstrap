@@ -32,6 +32,15 @@ function toKebabCase($string)
     return implode('-', explode(' ', strtolower($string)));
 }
 
+/**
+ * Transforms a given string of words to camel case.
+ *
+ * @since [*next-version*]
+ *
+ * @param string $string The input string.
+ *
+ * @return string
+ */
 function toCamelCase($string)
 {
     $parts   = preg_split('/[-_\s]/', $string);
