@@ -225,19 +225,22 @@
         <reflexive>
             <fileset refid="readme.md" />
             <filterchain>
-                <replaceregexp>
-                    <regexp pattern="\[\*composer\.vendor\*\]"       replace="${composer.vendor}" />
-                    <regexp pattern="\[\*composer\.name\*\]"         replace="${composer.name}" />
-                    <regexp pattern="\[\*composer\.desc\*\]"         replace="${composer.desc}" />
-                    <regexp pattern="\[\*composer\.type\*\]"         replace="${composer.type}" />
-                    <regexp pattern="\[\*composer\.license\*\]"      replace="${composer.license}" />
-                    <regexp pattern="\[\*composer\.author\*\]"       replace="${composer.author}" />
-                    <regexp pattern="\[\*composer\.email\*\]"        replace="${composer.email}" />
-                    <regexp pattern="\[\*composer\.minstab\*\]"      replace="${composer.minstab}" />
-                    <regexp pattern="\[\*composer\.phpver\*\]"       replace="${composer.phpver}" />
-                    <regexp pattern="\[\*composer\.autoload.ns\*\]"  replace="${composer.autoload.ns}" />
-                    <regexp pattern="\[\*composer\.autoload.dir\*\]" replace="${composer.autoload.dir}" />
-                </replaceregexp>
+                    <replacetokens begintoken="{{" endtoken="}}">
+                        <token key="project"               value="${project.name}" />
+                        <token key="organization"          value="${organization}" />
+                        <token key="year"                  value="${date.year}" />
+                        <token key="composer.vendor"       value="${composer.vendor}" />
+                        <token key="composer.name"         value="${composer.name}" />
+                        <token key="composer.desc"         value="${composer.desc}" />
+                        <token key="composer.type"         value="${composer.type}" />
+                        <token key="composer.license"      value="${composer.license}" />
+                        <token key="composer.author"       value="${composer.author}" />
+                        <token key="composer.email"        value="${composer.email}" />
+                        <token key="composer.minstab"      value="${composer.minstab}" />
+                        <token key="composer.phpver"       value="${composer.phpver}" />
+                        <token key="composer.autoload.ns"  value="${composer.autoload.ns}" />
+                        <token key="composer.autoload.dir" value="${composer.autoload.dir}" />
+                    </replacetokens>
             </filterchain>
         </reflexive>
     </target>
