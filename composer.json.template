@@ -23,5 +23,9 @@
         "psr-4": {
             "[*composer.autoload.ns*]": "[*composer.autoload.dir*]"
         }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "csfix": "php-cs-fixer fix -vvv"
     }
 }
