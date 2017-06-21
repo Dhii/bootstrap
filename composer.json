@@ -18,7 +18,7 @@
     },
     "scripts": {
         "post-create-project-cmd": [
-            "echo 'You can now run `phing` to initialize your project!'"
+            "echo 'You can `cd` into your project folder and run `vendor/bin/phing` to initialize your project!'"
         ]
     }
 }
