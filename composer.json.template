@@ -10,6 +10,7 @@
         }
     ],
     "minimum-stability": "[*composer.minstab*]",
+    "prefer-stable": true,
     "require": {
         "php": "[*composer.phpver*]"
     },
