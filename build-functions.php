@@ -29,7 +29,7 @@ function kebabCaseToUcWords($kebab)
  */
 function toKebabCase($string)
 {
-    return implode('-', explode(' ', strtolower($string)));
+    return preg_replace('/[ _\\-\\+\\/\\\\]+/', '-', strtolower($string));
 }
 
 /**
