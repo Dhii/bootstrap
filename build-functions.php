@@ -1,6 +1,18 @@
 <?php
 
 /**
+ * Detects the package name from the directory name.
+ *
+ * @since [*next-version*]
+ *
+ * @return string
+ */
+function detectPackageName()
+{
+    return basename(__DIR__);
+}
+
+/**
  * Transforms a kebab cased string into uppercased words.
  *
  * @since [*next-version*]

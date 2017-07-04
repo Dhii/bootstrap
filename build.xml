@@ -13,9 +13,10 @@
     <!--
         VARIABLE DEFAULTS
     -->
-    <property name="default.project.name"          value="My New Project" />
+    <php expression="detectPackageName()" returnProperty="default.composer.name"></php>
+    <php expression="kebabCaseToUcWords('${default.composer.name}')" returnProperty="default.project.name"></php>
+
     <property name="default.composer.vendor"       value="dhii" />
-    <property name="default.composer.name"         value="new-project" />
     <property name="default.composer.desc"         value="" />
     <property name="default.composer.type"         value="library" />
     <property name="default.composer.license"      value="MIT" />
