@@ -68,7 +68,7 @@
             <!-- Prompt fpor the rest -->
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.minstab}"      propertyName="composer.minstab"      promptText="Minimum Stability" />
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.phpver}"       propertyName="composer.phpver"       promptText="PHP Version Constraint" />
-            <propertyprompt useExistingValue="true" defaultValue="${default.composer.autoload.ns}"  propertyName="composer.autoload.ns"  promptText="PSR-4 Autoload Namespace" />
+            <propertyprompt useExistingValue="true" defaultValue="${default.composer.autoload.ns}"  propertyName="autoload.ns"           promptText="PSR-4 Autoload Namespace" />
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.autoload.dir}" propertyName="composer.autoload.dir" promptText="PSR-4 Autoload Directory" />
             <propertyprompt useExistingValue="true" defaultValue="${default.git.remote}"            propertyName="git.remote"            promptText="Git Remote URL" />
         </then>
@@ -78,7 +78,7 @@
         VARIABLE COMPUTATION
     -->
     <property name="netbeans.project.name" value="${composer.vendor} - ${composer.name}" />
-    <property name="composer.autoload.ns" value="${composer.autoload.ns}\" override="true" />
+    <property name="composer.autoload.ns" value="${autoload.ns}\" override="true" />
     <propertyregex property="composer.autoload.ns"
         override="true"
         subject="${composer.autoload.ns}"
@@ -135,6 +135,10 @@
         <include pattern="**/.gitkeep" />
     </fileset>
 
+    <fileset id="files.tests" dir="./test">
+        <include pattern="**/*Test.php" />
+    </fileset>
+
     <!--
         MAIN TARGET
     -->
@@ -143,6 +147,7 @@
                 files.init,
                 composer.init,
                 netbeans.init,
+                tests.init,
                 readme.init,
                 license.init,
                 git.init,
@@ -245,6 +250,24 @@
                         <token key="composer.autoload.ns"  value="${composer.autoload.ns}" />
                         <token key="composer.autoload.dir" value="${composer.autoload.dir}" />
                     </replacetokens>
+            </filterchain>
+        </reflexive>
+    </target>
+
+    <!--
+        TEST FILES
+        Templates the included starter test files.
+    -->
+    <target name="tests.init">
+        <php expression="sanitizeNamespace('${autoload.ns}')" returnProperty="ns"></php>
+        <php expression="escapeNamespaceForQuote('${ns}')" returnProperty="quote_ns"></php>
+        <reflexive>
+            <fileset refid="files.tests" />
+            <filterchain>
+                <replacetokens begintoken="{{" endtoken="}}">
+                    <token key="ns" value="${ns}" />
+                    <token key="quote_ns" value="${quote_ns}" />
+                </replacetokens>
             </filterchain>
         </reflexive>
     </target>

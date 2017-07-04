@@ -1,11 +1,11 @@
 <?php
 
-namespace _vendor\_package\FuncTest\_ns;
+namespace {{ns}}\FuncTest;
 
 use Xpmock\TestCase;
 
 /**
- * Tests {@see _vendor\_package\_ns\MyClass}.
+ * Tests {@see {{ns}}\MyClass}.
  *
  * @TODO Search and replace tokens that begin with underscore.
  *
@@ -18,14 +18,14 @@ class MyClassTest extends TestCase
      *
      * @since [*next-version*]
      */
-    const TEST_SUBJECT_CLASSNAME = '_vendor\\_package\\_ns\\MyClass';
+    const TEST_SUBJECT_CLASSNAME = '{{quote_ns}}\\MyClass';
 
     /**
      * Creates a new instance of the test subject.
      *
      * @since [*next-version*]
      *
-     * @return _vendor\_package\_ns\MyClass
+     * @return {{ns}}\MyClass
      */
     public function createInstance()
     {

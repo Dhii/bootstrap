@@ -1,11 +1,11 @@
 <?php
 
-namespace _vendor\_package\FuncTest\_ns;
+namespace {{ns}}\FuncTest;
 
 use Xpmock\TestCase;
 
 /**
- * Tests {@see _vendor\_package\_ns\MyClass}.
+ * Tests {@see {{ns}}\MyClass}.
  *
  * @since [*next-version*]
  */
@@ -16,7 +16,7 @@ class MyClassTest extends TestCase
      *
      * @since [*next-version*]
      *
-     * @return _vendor\_package\_ns\MyClass
+     * @return {{ns}}\MyClass
      */
     public function createInstance()
     {
@@ -34,7 +34,7 @@ class MyClassTest extends TestCase
         $subject = $this->createInstance();
 
         $this->assertInstanceOf(
-            '_vendor\\_package\\_ns\\MyClass', $subject, 'Subject is not a valid instance.'
+            '{{quote_ns}}\\MyClass', $subject, 'Subject is not a valid instance.'
         );
     }
 }

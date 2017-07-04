@@ -63,3 +63,31 @@ function generateNamespace($vendor, $projName)
 {
     return sprintf('%1$s\\%2$s', toCamelCase(kebabCaseToUcWords($vendor)), toCamelCase($projName));
 }
+
+/**
+ * Sanitizes a namespace, by removing trailing slashes and collapsing slashes.
+ *
+ * @since [*next-version*]
+ *
+ * @param string $namespace
+ *
+ * @return string
+ */
+function sanitizeNamespace($namespace)
+{
+    return preg_replace('/\\\\+/', '\\', trim($namespace, ' \/'));
+}
+
+/**
+ * Escapes a namespace's slashes, so that the namespace may be used in quotes.
+ *
+ * @since [*next-version*]
+ *
+ * @param string $namespace
+ *
+ * @return string
+ */
+function escapeNamespaceForQuote($namespace)
+{
+    return preg_replace('/\\\\+/', '\\\\\\\\', $namespace);
+}
