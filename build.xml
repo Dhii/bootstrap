@@ -42,7 +42,7 @@
             <php expression="toKebabCase('${composer.author}')" returnProperty="default.composer.vendor" />
 
             <!-- Prompt for Organization -->
-            <propertyprompt useExistingValue="true" defaultValue="${default.composer.author}"       propertyName="organization"          promptText="Organization Name" />
+            <propertyprompt useExistingValue="true" defaultValue="${composer.author}"               propertyName="organization"          promptText="Organization Name" />
 
             <!-- Prompt for project name -->
             <propertyprompt useExistingValue="true" defaultValue="${default.project.name}"          propertyName="project.name"          promptText="Project Name"/>
