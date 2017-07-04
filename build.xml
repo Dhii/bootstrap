@@ -41,16 +41,17 @@
             <!-- Generate vendor from author -->
             <php expression="toKebabCase('${composer.author}')" returnProperty="default.composer.vendor" />
 
-            <!-- Prompt for vendor -->
-            <propertyprompt useExistingValue="true" defaultValue="${default.composer.vendor}"       propertyName="composer.vendor"       promptText="Vendor" />
-            <php expression="toKebabCase('${composer.vendor}')" returnProperty="composer.vendor"></php>
-            <echo>Sanitized vendor to "${composer.vendor}"</echo>
-
-            <!-- Generate organization name from vendor -->
-            <php expression="kebabCaseToUcWords('${composer.vendor}')" returnProperty="organization" />
+            <!-- Prompt for Organization -->
+            <propertyprompt useExistingValue="true" defaultValue="${default.composer.author}"       propertyName="organization"          promptText="Organization Name" />
 
             <!-- Prompt for project name -->
             <propertyprompt useExistingValue="true" defaultValue="${default.project.name}"          propertyName="project.name"          promptText="Project Name"/>
+
+            <!-- Prompt for package vendor -->
+            <php expression="toKebabCase('${organization}')" returnProperty="default.composer.vendor"></php>
+            <propertyprompt useExistingValue="true" defaultValue="${default.composer.vendor}"       propertyName="composer.vendor"       promptText="Package Vendor" />
+            <php expression="toKebabCase('${composer.vendor}')" returnProperty="composer.vendor"></php>
+            <echo>Sanitized vendor to "${composer.vendor}"</echo>
 
             <!-- Generate package name from project name -->
             <php expression="toKebabCase('${project.name}')" returnProperty="default.composer.name" />

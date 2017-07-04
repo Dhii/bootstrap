@@ -41,7 +41,32 @@ function kebabCaseToUcWords($kebab)
  */
 function toKebabCase($string)
 {
-    return preg_replace('/[ _\\-\\+\\/\\\\]+/', '-', strtolower($string));
+    $collapsed = collapseChars($string, array('_', '-', '+', '/', '\\'));
+
+    return preg_replace('/[ _\\-\\+\\/\\\\]+/', '-', strtolower($collapsed));
+}
+
+/**
+ * Transforms a given string into kebab case.
+ *
+ * @since [*next-version*]
+ *
+ * @param string $subject     The subject string.
+ * @param array  $chars       The characters to collapse.
+ * @param string $replacement The replacement character.
+ *
+ * @return string
+ */
+function collapseChars($subject, $chars, $replacement = '$0')
+{
+    $slashedChars = array_map(function($char) {
+        return preg_quote($char, '/');
+    }, $chars);
+
+    $charMask = implode('', $slashedChars);
+    $pattern  = sprintf('/[%s]+/', $charMask);
+
+    return preg_replace($pattern, $replacement, $subject);
 }
 
 /**
