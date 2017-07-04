@@ -30,8 +30,6 @@ class MyClassTest extends TestCase
     public function createInstance()
     {
         $mock = $this->mock(static::TEST_SUBJECT_CLASSNAME)
-            // @TODO Add mock methods
-            ->methods()
             ->new();
 
         return $mock;
