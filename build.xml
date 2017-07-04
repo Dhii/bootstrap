@@ -42,6 +42,8 @@
 
             <!-- Prompt for vendor -->
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.vendor}"       propertyName="composer.vendor"       promptText="Vendor" />
+            <php expression="toKebabCase('${composer.vendor}')" returnProperty="composer.vendor"></php>
+            <echo>Sanitized vendor to "${composer.vendor}"</echo>
 
             <!-- Generate organization name from vendor -->
             <php expression="kebabCaseToUcWords('${composer.vendor}')" returnProperty="organization" />
