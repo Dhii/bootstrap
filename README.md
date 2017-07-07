@@ -1,4 +1,4 @@
-# Dhii Project Bootstrap
+# Bootstrap
 
 [![Latest Stable Version](https://poser.pugx.org/dhii/bootstrap/version)](https://packagist.org/packages/dhii/bootstrap)
 
