@@ -1,5 +1,5 @@
 {
-    "name": "dhii/project-bootstrap",
+    "name": "dhii/bootstrap",
     "description": "Bootstraps a new Dhii project.",
     "type": "tool",
     "license": "MIT",
