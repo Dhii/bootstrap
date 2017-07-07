@@ -3,11 +3,20 @@
 
     <property name="quiet" value="false" />
 
+    <!-- Import Build Functions -->
+    <property name="buildFnFile" value="build-functions.php" />
+    <php expression="require('${buildFnFile}');" />
+
+    <!-- Default Timezone -->
+    <php expression="date_default_timezone_set('UTC');" />
+
     <!--
         VARIABLE DEFAULTS
     -->
+    <php expression="detectPackageName()" returnProperty="default.composer.name"></php>
+    <php expression="kebabCaseToUcWords('${default.composer.name}')" returnProperty="default.project.name"></php>
+
     <property name="default.composer.vendor"       value="dhii" />
-    <property name="default.composer.name"         value="new-project" />
     <property name="default.composer.desc"         value="" />
     <property name="default.composer.type"         value="library" />
     <property name="default.composer.license"      value="MIT" />
@@ -15,8 +24,9 @@
     <property name="default.composer.email"        value="development@dhii.co" />
     <property name="default.composer.minstab"      value="dev" />
     <property name="default.composer.phpver"       value="^5.3 | ^7.0" />
-    <property name="default.composer.autoload.ns"  value="Dhii\\NewProject\\" />
+    <property name="default.composer.autoload.ns"  value="Dhii\NewProject" />
     <property name="default.composer.autoload.dir" value="src" />
+    <property name="default.git.remote"            value="(none)" />
 
     <!--
         VARIABLE PROMPTS
@@ -24,17 +34,45 @@
     <if>
         <isfalse value="${quiet}" />
         <then>
-            <propertyprompt useExistingValue="true" defaultValue="${default.composer.vendor}"       propertyName="composer.vendor"       promptText="Vendor" />
+            <!-- Prompt for author -->
+            <propertyprompt useExistingValue="true" defaultValue="${default.composer.author}"       propertyName="composer.author"       promptText="Author Name" />
+            <propertyprompt useExistingValue="true" defaultValue="${default.composer.email}"        propertyName="composer.email"        promptText="Author Email" />
+
+            <!-- Generate vendor from author -->
+            <php expression="toKebabCase('${composer.author}')" returnProperty="default.composer.vendor" />
+
+            <!-- Prompt for Organization -->
+            <propertyprompt useExistingValue="true" defaultValue="${composer.author}"               propertyName="organization"          promptText="Organization Name" />
+
+            <!-- Prompt for project name -->
+            <propertyprompt useExistingValue="true" defaultValue="${default.project.name}"          propertyName="project.name"          promptText="Project Name"/>
+
+            <!-- Prompt for package vendor -->
+            <php expression="toKebabCase('${organization}')" returnProperty="default.composer.vendor"></php>
+            <propertyprompt useExistingValue="true" defaultValue="${default.composer.vendor}"       propertyName="composer.vendor"       promptText="Package Vendor" />
+            <php expression="toKebabCase('${composer.vendor}')" returnProperty="composer.vendor"></php>
+            <echo>Sanitized vendor to "${composer.vendor}"</echo>
+
+            <!-- Generate package name from project name -->
+            <php expression="toKebabCase('${project.name}')" returnProperty="default.composer.name" />
+
+            <!-- prompt for Composer package info -->
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.name}"         propertyName="composer.name"         promptText="Package Name"/>
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.desc}"         propertyName="composer.desc"         promptText="Description"/>
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.type}"         propertyName="composer.type"         promptText="Package Type" />
+
+            <!-- Prompt for license -->
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.license}"      propertyName="composer.license"      promptText="License" />
-            <propertyprompt useExistingValue="true" defaultValue="${default.composer.author}"       propertyName="composer.author"       promptText="Author Name" />
-            <propertyprompt useExistingValue="true" defaultValue="${default.composer.email}"        propertyName="composer.email"        promptText="Author Email" />
+            <php expression="strtoupper('${composer.license}')" returnProperty="composer.license" />
+
+            <php expression="generateNamespace('${composer.vendor}', '${project.name}')" returnProperty="default.composer.autoload.ns" />
+
+            <!-- Prompt fpor the rest -->
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.minstab}"      propertyName="composer.minstab"      promptText="Minimum Stability" />
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.phpver}"       propertyName="composer.phpver"       promptText="PHP Version Constraint" />
-            <propertyprompt useExistingValue="true" defaultValue="${default.composer.autoload.ns}"  propertyName="composer.autoload.ns"  promptText="PSR-4 Autoload Namespace" />
+            <propertyprompt useExistingValue="true" defaultValue="${default.composer.autoload.ns}"  propertyName="autoload.ns"           promptText="PSR-4 Autoload Namespace" />
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.autoload.dir}" propertyName="composer.autoload.dir" promptText="PSR-4 Autoload Directory" />
+            <propertyprompt useExistingValue="true" defaultValue="${default.git.remote}"            propertyName="git.remote"            promptText="Git Remote URL" />
         </then>
     </if>
 
@@ -42,11 +80,16 @@
         VARIABLE COMPUTATION
     -->
     <property name="netbeans.project.name" value="${composer.vendor} - ${composer.name}" />
+    <property name="composer.autoload.ns" value="${autoload.ns}\" override="true" />
     <propertyregex property="composer.autoload.ns"
         override="true"
         subject="${composer.autoload.ns}"
         pattern="\\"
-        replace="\\\\" />
+        replace="\\\\\\\\" />
+
+    <tstamp>
+        <format property="date.year" pattern="%Y" />
+    </tstamp>
 
     <!--
         OTHER VARS
@@ -54,11 +97,22 @@
     <property name="file.nb.project.xml"        value="project.xml" />
     <property name="file.nb.project.properties" value="project.properties" />
 
+    <property name="file.composer.lock"         value="composer.lock" />
+
     <property name="file.composer.json"         value="composer.json" />
     <property name="template.composer.json"     value="composer.json.template" />
 
     <property name="file.readme.md"             value="README.md" />
     <property name="template.readme.md"         value="README.md.template" />
+
+    <property name="file.changelog.md"          value="CHANGELOG.md" />
+    <property name="template.changelog.md"      value="CHANGELOG.md.template" />
+
+    <property name="dir.licenses"               value="./licenses" />
+    <property name="file.license"               value="LICENSE" />
+    <property name="template.license"           value="LICENSE-${composer.license}" />
+
+    <property name="file.build.xml"             value="build.xml" />
 
     <!--
         FILESETS
@@ -79,14 +133,28 @@
         <include pattern="${file.readme.md}" />
     </fileset>
 
-    <fileset id="git.keep.files" dir=".">
+    <fileset id="files.git" dir=".">
         <include pattern="**/.gitkeep" />
+    </fileset>
+
+    <fileset id="files.tests" dir="./test">
+        <include pattern="**/*Test.php" />
     </fileset>
 
     <!--
         MAIN TARGET
     -->
-    <target name="init" depends="files.init, composer.init, netbeans.init, readme.init, git.init, finalize">
+    <target name="init"
+            depends="
+                files.init,
+                composer.init,
+                netbeans.init,
+                tests.init,
+                readme.init,
+                license.init,
+                git.init,
+                finalize,
+                selfdestruct">
     </target>
 
     <!--
@@ -95,6 +163,7 @@
     <target name="files.init">
         <move file="${template.composer.json}" tofile="${file.composer.json}" overwrite="true" />
         <move file="${template.readme.md}"     tofile="${file.readme.md}" overwrite="true" />
+        <move file="${template.changelog.md}"  tofile="${file.changelog.md}" overwrite="true" />
     </target>
 
     <!--
@@ -153,7 +222,7 @@
             <fileset refid="netbeans.project.properties" />
             <filterchain>
                 <replaceregexp>
-                    <regexp pattern="\[\*netbeans\.project\.name\*\]"  replace="${composer.name}"/>
+                    <regexp pattern="\[\*composer\.name\*\]"  replace="${composer.name}"/>
                 </replaceregexp>
             </filterchain>
         </reflexive>
@@ -167,21 +236,63 @@
         <reflexive>
             <fileset refid="readme.md" />
             <filterchain>
-                <replaceregexp>
-                    <regexp pattern="\[\*composer\.vendor\*\]"       replace="${composer.vendor}" />
-                    <regexp pattern="\[\*composer\.name\*\]"         replace="${composer.name}" />
-                    <regexp pattern="\[\*composer\.desc\*\]"         replace="${composer.desc}" />
-                    <regexp pattern="\[\*composer\.type\*\]"         replace="${composer.type}" />
-                    <regexp pattern="\[\*composer\.license\*\]"      replace="${composer.license}" />
-                    <regexp pattern="\[\*composer\.author\*\]"       replace="${composer.author}" />
-                    <regexp pattern="\[\*composer\.email\*\]"        replace="${composer.email}" />
-                    <regexp pattern="\[\*composer\.minstab\*\]"      replace="${composer.minstab}" />
-                    <regexp pattern="\[\*composer\.phpver\*\]"       replace="${composer.phpver}" />
-                    <regexp pattern="\[\*composer\.autoload.ns\*\]"  replace="${composer.autoload.ns}" />
-                    <regexp pattern="\[\*composer\.autoload.dir\*\]" replace="${composer.autoload.dir}" />
-                </replaceregexp>
+                    <replacetokens begintoken="{{" endtoken="}}">
+                        <token key="project"               value="${project.name}" />
+                        <token key="organization"          value="${organization}" />
+                        <token key="year"                  value="${date.year}" />
+                        <token key="composer.vendor"       value="${composer.vendor}" />
+                        <token key="composer.name"         value="${composer.name}" />
+                        <token key="composer.desc"         value="${composer.desc}" />
+                        <token key="composer.type"         value="${composer.type}" />
+                        <token key="composer.license"      value="${composer.license}" />
+                        <token key="composer.author"       value="${composer.author}" />
+                        <token key="composer.email"        value="${composer.email}" />
+                        <token key="composer.minstab"      value="${composer.minstab}" />
+                        <token key="composer.phpver"       value="${composer.phpver}" />
+                        <token key="composer.autoload.ns"  value="${composer.autoload.ns}" />
+                        <token key="composer.autoload.dir" value="${composer.autoload.dir}" />
+                    </replacetokens>
             </filterchain>
         </reflexive>
+    </target>
+
+    <!--
+        TEST FILES
+        Templates the included starter test files.
+    -->
+    <target name="tests.init">
+        <php expression="sanitizeNamespace('${autoload.ns}')" returnProperty="ns"></php>
+        <php expression="escapeNamespaceForQuote('${ns}')" returnProperty="quote_ns"></php>
+        <reflexive>
+            <fileset refid="files.tests" />
+            <filterchain>
+                <replacetokens begintoken="{{" endtoken="}}">
+                    <token key="ns" value="${ns}" />
+                    <token key="quote_ns" value="${quote_ns}" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+    </target>
+
+    <!--
+        LICENSE FILE
+        Templates the correct license file and removes the others.
+    -->
+    <target name="license.init">
+        <reflexive>
+            <fileset dir="${dir.licenses}" >
+                <include pattern="${template.license}" />
+            </fileset>
+            <filterchain>
+                <replacetokens begintoken="{{" endtoken="}}">
+                    <token key="project" value="${project.name}" />
+                    <token key="organization" value="${organization}" />
+                    <token key="year" value="${date.year}" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+        <move file="${dir.licenses}/${template.license}" tofile="${file.license}" overwrite="true" />
+        <delete dir="${dir.licenses}" />
     </target>
 
     <!--
@@ -190,8 +301,16 @@
     <target name="git.init">
         <exec command="rm -rf .git" />
         <exec command="git init" />
-        <exec command="git checkout -b master" />
-        <exec command="git checkout -b develop" />
+        <exec command="git branch master" />
+        <exec command="git branch develop" />
+        <exec command="git checkout master" />
+        <if>
+            <not><equals arg1="${git.remote}" arg2="(none)" /></not>
+            <then>
+                <exec command="git remote add origin ${git.remote}" />
+            </then>
+        </if>
+        <exec command="git add -a" />
     </target>
 
     <!--
@@ -199,8 +318,18 @@
     -->
     <target name="finalize">
         <delete>
-            <fileset refid="git.keep.files" />
+            <fileset refid="files.git" />
         </delete>
+        <delete file="${file.composer.lock}" />
+        <exec command="composer update" passthru="true" />
+    </target>
+
+    <!--
+        Selfdestruct
+    -->
+    <target name="selfdestruct">
+        <delete file="${file.build.xml}" />
+        <delete file="${buildFnFile}" />
     </target>
 
 </project>
