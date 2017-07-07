@@ -11,7 +11,7 @@ A bootstrap for creating Dhii projects.
 To create a new project, simply invoke:
 
 ```
-composer create-project dhii/project-bootstrap my-project
+composer create-project dhii/bootstrap my-project
 ```
 
 This will create the `my-project` directory and download the bootstrap files.
