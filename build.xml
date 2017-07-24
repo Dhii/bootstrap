@@ -112,6 +112,9 @@
     <property name="file.license"               value="LICENSE" />
     <property name="template.license"           value="LICENSE-${composer.license}" />
 
+    <property name="file.gitattributes"         value=".gitattributes" />
+    <property name="template.gitattributes"     value=".gitattributes.template" />
+
     <property name="file.build.xml"             value="build.xml" />
 
     <!--
@@ -320,6 +323,7 @@
         <delete>
             <fileset refid="files.git" />
         </delete>
+        <move file="${template.gitattributes}" tofile="${file.gitattributes}" overwrite="true" />
         <delete file="${file.composer.lock}" />
         <exec command="composer update" passthru="true" />
     </target>
