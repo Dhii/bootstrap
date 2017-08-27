@@ -43,7 +43,9 @@ class MyClassTest extends TestCase
         $subject = $this->createInstance();
 
         $this->assertInstanceOf(
-            '{{quote_ns}}\\MyClass', $subject, 'Subject is not a valid instance.'
+            static::TEST_SUBJECT_CLASSNAME,
+            $subject,
+            'A valid instance of the test subject could not be created.'
         );
     }
 }
