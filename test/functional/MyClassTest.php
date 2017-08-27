@@ -7,8 +7,6 @@ use Xpmock\TestCase;
 /**
  * Tests {@see {{ns}}\MyClass}.
  *
- * @TODO Search and replace tokens that begin with underscore.
- *
  * @since [*next-version*]
  */
 class MyClassTest extends TestCase
