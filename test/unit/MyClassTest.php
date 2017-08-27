@@ -27,8 +27,10 @@ class MyClassTest extends TestCase
      */
     public function createInstance()
     {
-        // @TODO Change this to the real test subject.
-        return new MyClass();
+        $mock = $this->mock(static::TEST_SUBJECT_CLASSNAME)
+                     ->new();
+
+        return $mock;
     }
 
     /**
