@@ -128,3 +128,18 @@ function escapeNamespaceForQuote($namespace)
 {
     return preg_replace('/\\\\+/', '\\\\\\\\', $namespace);
 }
+
+/**
+ * Builds a GitHub repo URL from vendor and package information.
+ *
+ * @since [*next-version*]
+ *
+ * @param string $vendor  The package vendor.
+ * @param string $package The package slug name.
+ *
+ * @return string
+ */
+function buildGitHubRepoUrl($vendor, $package)
+{
+    return sprintf('https://github.com/%1$s/%2$s.git', $vendor, $package);
+}
