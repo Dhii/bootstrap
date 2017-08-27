@@ -72,6 +72,9 @@
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.phpver}"       propertyName="composer.phpver"       promptText="PHP Version Constraint" />
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.autoload.ns}"  propertyName="autoload.ns"           promptText="PSR-4 Autoload Namespace" />
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.autoload.dir}" propertyName="composer.autoload.dir" promptText="PSR-4 Autoload Directory" />
+
+            <!-- Prompt for git remote -->
+            <php expression="buildGitHubRepoUrl('${composer.vendor}', '${composer.name}')" returnProperty="default.git.remote" />
             <propertyprompt useExistingValue="true" defaultValue="${default.git.remote}"            propertyName="git.remote"            promptText="Git Remote URL" />
         </then>
     </if>
