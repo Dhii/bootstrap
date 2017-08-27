@@ -9,7 +9,7 @@ use Xpmock\TestCase;
  *
  * @since [*next-version*]
  */
-class MyClassTest extends TestCase
+class MyClassFuncTest extends TestCase
 {
     /**
      * The name of the test subject.
