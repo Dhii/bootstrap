@@ -12,6 +12,13 @@ use Xpmock\TestCase;
 class MyClassTest extends TestCase
 {
     /**
+     * The name of the test subject.
+     *
+     * @since [*next-version*]
+     */
+    const TEST_SUBJECT_CLASSNAME = '{{quote_ns}}\\MyClass';
+
+    /**
      * Creates a new instance of the test subject.
      *
      * @since [*next-version*]
