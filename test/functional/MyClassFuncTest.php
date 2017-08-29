@@ -3,6 +3,7 @@
 namespace {{ns}}\FuncTest;
 
 use Xpmock\TestCase;
+use {{ns}}\MyClass as TestSubject;
 
 /**
  * Tests {@see {{ns}}\MyClass}.
@@ -16,14 +17,14 @@ class MyClassFuncTest extends TestCase
      *
      * @since [*next-version*]
      */
-    const TEST_SUBJECT_CLASSNAME = '{{quote_ns}}\\MyClass';
+    const TEST_SUBJECT_CLASSNAME = '{{ns}}\MyClass';
 
     /**
      * Creates a new instance of the test subject.
      *
      * @since [*next-version*]
      *
-     * @return {{ns}}\MyClass
+     * @return TestSubject
      */
     public function createInstance()
     {
