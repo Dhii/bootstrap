@@ -5,7 +5,7 @@ namespace {{ns}}\FuncTest;
 use Xpmock\TestCase;
 
 /**
- * Tests {@see {{ns}}\MyClass}.
+ * Tests {@see \{{ns}}\MyClass}.
  *
  * @TODO Search and replace tokens that begin with underscore.
  *
@@ -25,7 +25,7 @@ class MyClassTest extends TestCase
      *
      * @since [*next-version*]
      *
-     * @return {{ns}}\MyClass
+     * @return \{{ns}}\MyClass
      */
     public function createInstance()
     {
