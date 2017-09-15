@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ns}}\FuncTest;
+namespace {{ns}}UnitTest;
 
 use Xpmock\TestCase;
 use {{ns}}\MyClass as TestSubject;
