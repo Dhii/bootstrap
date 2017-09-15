@@ -10,7 +10,7 @@ use {{ns}}\MyClass as TestSubject;
  *
  * @since [*next-version*]
  */
-class MyClassUnitTest extends TestCase
+class MyClassTest extends TestCase
 {
     /**
      * The name of the test subject.
