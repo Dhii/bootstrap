@@ -6,7 +6,7 @@ use Xpmock\TestCase;
 use {{ns}}\MyClass as TestSubject;
 
 /**
- * Tests {@see {{ns}}\MyClass}.
+ * Tests {@see TestSubject}.
  *
  * @since [*next-version*]
  */
