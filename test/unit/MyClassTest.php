@@ -1,27 +1,37 @@
 <?php
 
-namespace {{ns}}\FuncTest;
+namespace {{ns}}UnitTest;
 
 use Xpmock\TestCase;
+use {{ns}}\MyClass as TestSubject;
 
 /**
- * Tests {@see {{ns}}\MyClass}.
+ * Tests {@see TestSubject}.
  *
  * @since [*next-version*]
  */
 class MyClassTest extends TestCase
 {
     /**
+     * The name of the test subject.
+     *
+     * @since [*next-version*]
+     */
+    const TEST_SUBJECT_CLASSNAME = '{{ns}}\MyClass';
+
+    /**
      * Creates a new instance of the test subject.
      *
      * @since [*next-version*]
      *
-     * @return {{ns}}\MyClass
+     * @return TestSubject
      */
     public function createInstance()
     {
-        // @TODO Change this to the real test subject.
-        return new MyClass();
+        $mock = $this->mock(static::TEST_SUBJECT_CLASSNAME)
+                     ->new();
+
+        return $mock;
     }
 
     /**
@@ -34,7 +44,9 @@ class MyClassTest extends TestCase
         $subject = $this->createInstance();
 
         $this->assertInstanceOf(
-            '{{quote_ns}}\\MyClass', $subject, 'Subject is not a valid instance.'
+            static::TEST_SUBJECT_CLASSNAME,
+            $subject,
+            'A valid instance of the test subject could not be created.'
         );
     }
 }

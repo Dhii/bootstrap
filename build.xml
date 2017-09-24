@@ -23,7 +23,7 @@
     <property name="default.composer.author"       value="Dhii Team" />
     <property name="default.composer.email"        value="development@dhii.co" />
     <property name="default.composer.minstab"      value="dev" />
-    <property name="default.composer.phpver"       value="^5.3 | ^7.0" />
+    <property name="default.composer.phpver"       value="^5.4 | ^7.0" />
     <property name="default.composer.autoload.ns"  value="Dhii\NewProject" />
     <property name="default.composer.autoload.dir" value="src" />
     <property name="default.git.remote"            value="(none)" />
@@ -72,6 +72,9 @@
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.phpver}"       propertyName="composer.phpver"       promptText="PHP Version Constraint" />
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.autoload.ns}"  propertyName="autoload.ns"           promptText="PSR-4 Autoload Namespace" />
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.autoload.dir}" propertyName="composer.autoload.dir" promptText="PSR-4 Autoload Directory" />
+
+            <!-- Prompt for git remote -->
+            <php expression="buildGitHubRepoUrl('${composer.vendor}', '${composer.name}')" returnProperty="default.git.remote" />
             <propertyprompt useExistingValue="true" defaultValue="${default.git.remote}"            propertyName="git.remote"            promptText="Git Remote URL" />
         </then>
     </if>
@@ -111,6 +114,9 @@
     <property name="dir.licenses"               value="./licenses" />
     <property name="file.license"               value="LICENSE" />
     <property name="template.license"           value="LICENSE-${composer.license}" />
+
+    <property name="file.gitattributes"         value=".gitattributes" />
+    <property name="template.gitattributes"     value=".gitattributes.template" />
 
     <property name="file.build.xml"             value="build.xml" />
 
@@ -320,6 +326,7 @@
         <delete>
             <fileset refid="files.git" />
         </delete>
+        <move file="${template.gitattributes}" tofile="${file.gitattributes}" overwrite="true" />
         <delete file="${file.composer.lock}" />
         <exec command="composer update" passthru="true" />
     </target>
