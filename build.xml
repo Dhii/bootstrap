@@ -28,6 +28,8 @@
     <property name="default.composer.autoload.dir" value="src" />
     <property name="default.git.remote"            value="(none)" />
 
+    <property name="autoload.ns.numWords"          value="1" />
+
     <!--
         VARIABLE PROMPTS
     -->
