@@ -93,12 +93,16 @@ function toCamelCase($string)
  *
  * @param string $vendor   The vendor.
  * @param string $projName The project name.
+ * @param int    $numWords The number of words to extract from the project name.
  *
  * @return string
  */
-function generateNamespace($vendor, $projName)
+function generateNamespace($vendor, $projName, $numWords = 1)
 {
-    return sprintf('%1$s\\%2$s', toCamelCase(kebabCaseToUcWords($vendor)), toCamelCase($projName));
+    $vendor  = toCamelCase(kebabCaseToUcWords($vendor));
+    $project = toCamelCase(truncateWords($projName, $numWords));
+
+    return sprintf('%1$s\\%2$s', $vendor, $project);
 }
 
 /**
