@@ -143,3 +143,26 @@ function buildGitHubRepoUrl($vendor, $package)
 {
     return sprintf('https://github.com/%1$s/%2$s.git', $vendor, $package);
 }
+
+/**
+ * A simple algorithm for truncating a string to a specific number of words.
+ *
+ * @since [*next-version*]
+ *
+ * @param string $subject  The subject string.
+ * @param int    $numWords The number of words to truncate to.
+ *
+ * @return string The truncated string.
+ */
+function truncateWords($subject, $numWords)
+{
+    // The explode limit is used to stop splitting after $numWords words.
+    // The last element will contain the rest of the string
+    $parts = explode(' ', $subject, $numWords + 1);
+
+    // Remove the last element from the list
+    array_pop($parts);
+
+    // Re-join the remaining parts
+    return implode(' ', $parts);
+}
