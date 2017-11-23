@@ -28,6 +28,8 @@
     <property name="default.composer.autoload.dir" value="src" />
     <property name="default.git.remote"            value="(none)" />
 
+    <property name="autoload.ns.numWords"          value="1" />
+
     <!--
         VARIABLE PROMPTS
     -->
@@ -65,9 +67,9 @@
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.license}"      propertyName="composer.license"      promptText="License" />
             <php expression="strtoupper('${composer.license}')" returnProperty="composer.license" />
 
-            <php expression="generateNamespace('${composer.vendor}', '${project.name}')" returnProperty="default.composer.autoload.ns" />
+            <php expression="generateNamespace('${composer.vendor}', '${project.name}', ${autoload.ns.numWords})" returnProperty="default.composer.autoload.ns" />
 
-            <!-- Prompt fpor the rest -->
+            <!-- Prompt for the rest -->
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.minstab}"      propertyName="composer.minstab"      promptText="Minimum Stability" />
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.phpver}"       propertyName="composer.phpver"       promptText="PHP Version Constraint" />
             <propertyprompt useExistingValue="true" defaultValue="${default.composer.autoload.ns}"  propertyName="autoload.ns"           promptText="PSR-4 Autoload Namespace" />
