@@ -25,6 +25,12 @@
             "[*composer.autoload.ns*]": "[*composer.autoload.dir*]"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Dhii\\Collection\\UnitTest": "test/unit",
+            "Dhii\\Collection\\FuncTest": "test/functional"
+        }
+    },
     "scripts": {
         "test": "phpunit",
         "csfix": "php-cs-fixer fix -vvv"
