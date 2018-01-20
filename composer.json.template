@@ -27,8 +27,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Dhii\\Collection\\UnitTest\\": "test/unit",
-            "Dhii\\Collection\\FuncTest\\": "test/functional"
+            "[*composer.autoload.ns*]UnitTest\\": "test/unit",
+            "[*composer.autoload.ns*]FuncTest\\": "test/functional"
         }
     },
     "scripts": {
