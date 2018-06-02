@@ -1,6 +1,6 @@
 # {{organization}} - {{project}}
 
-[![Build Status](https://travis-ci.org/{{composer.vendor}}/{{composer.name}}.svg?branch=develop)](https://travis-ci.org/{{composer.vendor}}/{{composer.name}})
+[![Build Status](https://travis-ci.com/{{composer.vendor}}/{{composer.name}}.svg?branch=develop)](https://travis-ci.com/{{composer.vendor}}/{{composer.name}})
 [![Code Climate](https://codeclimate.com/github/{{composer.vendor}}/{{composer.name}}/badges/gpa.svg)](https://codeclimate.com/github/{{composer.vendor}}/{{composer.name}})
 [![Test Coverage](https://codeclimate.com/github/{{composer.vendor}}/{{composer.name}}/badges/coverage.svg)](https://codeclimate.com/github/{{composer.vendor}}/{{composer.name}}/coverage)
 [![Latest Stable Version](https://poser.pugx.org/{{composer.vendor}}/{{composer.name}}/version)](https://packagist.org/packages/{{composer.vendor}}/{{composer.name}})
